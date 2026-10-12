@@ -13,7 +13,7 @@ if __name__ == '__main__':
     t = 0.0
     while (t < 2.0):
         lx.append(t)  # Ajoute t a la liste des abscisses
-        ly.append(f(t))  # Calcule f(x) et ajoute f(x) aux ordonnes 
+        ly.append(f(t))  # Calcule f(x) et l'ajoute aux ordonnes 
         t = t + 0.05
     ax.plot(lx, ly, "ob")
 

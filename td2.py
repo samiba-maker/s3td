@@ -33,12 +33,11 @@ def list_of_absc(xmin=0, xmax=10, nb=25):
     n = 0 
     x = xmin
     pas = (xmax-xmin)/(nb-1)
-    NMAX = nb-2
+    NMAX = nb-1
     while n < NMAX:
         x = x + pas
         l.append(x)
         n = n + 1
-    l.append(xmax)
     return l 
     
 
@@ -61,30 +60,29 @@ if __name__ == "__main__":
 
     # Affichage des abscisses de Newton-Raphson
     ax.plot(lxn, [0 for x in lxn], "gd", label="NR abs")
-    
-    for i in range(len(lxn) - 1):  # parcourt les estimations voisines
-        xi = lxn[i]  # estimation actuelle
-        x_suivant = lxn[i + 1]  # estimation suivante
-        ax.plot([xi, x_suivant], [f(xi), 0], "r--")  # trace tangente en points rouges
 
-    for i, x_i in enumerate(lxn):
-        ax.plot([x_i, x_i], [0, f(x_i)], "k:")  # Verticale en pointillés
-        ax.annotate(
-            "x{}".format(i),                    # Étiquette x0, x1, ...
-            (x_i, 0),
-            xytext=(0, -15),
-            textcoords="offset points",
-            ha="center"
-    )
-    # Décoration de la figure
-    ax.set(
-        xlabel="x",
-        ylabel="f(x)",
-        title="Newton Raphson v1 sur $x^2 - 2 = 0$"
-    )
-    ax.grid()
-    ax.legend()
+i = 0
+while i < len(lxn) - 1:  # parcourt estimations voisines
+    xi = lxn[i]  # estimation actuelle
+    x_suivant = lxn[i + 1] 
+    ax.plot([xi, x_suivant], [f(xi), 0], "r--")  # tan rouge
+    i = i + 1 
 
-    # Enregistrement et affichage
-    fig.savefig("td2.png")
-    plt.show()
+i = 0
+while i < len(lxn):
+    x_i = lxn[i]
+    ax.plot([x_i, x_i], [0, f(x_i)], "k--")
+    i = i + 1 
+
+# Décoration de la figure
+ax.set(
+    xlabel="x",
+    ylabel="f(x)",
+    title="Newton Raphson v1 sur $x^2 - 2 = 0$"
+)
+ax.grid()
+ax.legend()
+
+ # Enregistrement et affichage
+fig.savefig("td2.png")
+plt.show()
